@@ -1,4 +1,4 @@
-// Select Function
+p// Select Function
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
@@ -38,7 +38,7 @@ for (let p of pages) {
 
   // Checks if we are on home page
   if (!ARE_WE_HOME && !url.startsWith('http')) {
-    url = '/portfolio/' + url;
+    url = '/dsc106-project3'/ + url;
   }
   let title = p.title;
   let a = document.createElement('a');
