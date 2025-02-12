@@ -2,10 +2,8 @@
 // Create Page Links
 let pages = [
   { url: '', title: 'Home' },
-  { url: 'vis1/', title: 'Vis1' },
+  { url: 'vis1/', title: 'Vis1'},
   { url: 'vis2/', title: 'Vis2'},
-  { url: 'vis3/', title: 'Vis3'},
-  { url: 'vis4/', title: 'Vis4'}
 ];
 
 // Add nav to beginning of html
