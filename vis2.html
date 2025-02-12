@@ -23,7 +23,7 @@
                 d["Glucose Value (mg/dL)"] = +d["Glucose Value (mg/dL)"];
             });
 
-            const margin = { top: 40, right: 30, bottom: 50, left: 100 },
+            const margin = { top: 40, right: 30, bottom: 70, left: 120 },
                   width = 900 - margin.left - margin.right,
                   height = 600 - margin.top - margin.bottom;
 
@@ -51,7 +51,27 @@
                .attr("dy", "0.5em")
                .attr("transform", "rotate(-45)");
 
-            svg.append("g").call(d3.axisLeft(y));
+            svg.append("g")
+               .call(d3.axisLeft(y));
+
+            // X-axis label
+            svg.append("text")
+               .attr("x", width / 2)
+               .attr("y", height + 50)
+               .attr("fill", "black")
+               .attr("class", "axis-label")
+               .style("text-anchor", "middle")
+               .text("Time of Day (15-Min Intervals)");
+
+            // Y-axis label
+            svg.append("text")
+               .attr("transform", "rotate(-90)")
+               .attr("x", -height / 2)
+               .attr("y", -80)
+               .attr("fill", "black")
+               .attr("class", "axis-label")
+               .style("text-anchor", "middle")
+               .text("Date");
 
             svg.selectAll(".heatmap-cell")
                .data(data)
