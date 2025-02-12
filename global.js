@@ -1,4 +1,4 @@
-p// Select Function
+// Select Function
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
