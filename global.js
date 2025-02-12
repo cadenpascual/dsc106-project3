@@ -1,12 +1,3 @@
-let currentLink = navLinks.find(
-  (a) => a.host === location.host && a.pathname === location.pathname
-);
-
-if (currentLink) {
-  // or if (currentLink !== undefined)
-  currentLink?.classList.add('current');
-}
-
 // Step 3
 // Create Page Links
 let pages = [
