@@ -2,10 +2,10 @@
 // Create Page Links
 let pages = [
   { url: '', title: 'Home' },
-  { url: 'projects/', title: 'Projects' },
-  { url: 'contact/', title: 'Contact'},
-  { url: 'resume/', title: 'Resume'},
-  { url: 'highlight/', title: 'Highlight'}
+  { url: 'vis1/', title: 'Vis1' },
+  { url: 'vis2/', title: 'Vis2'},
+  { url: 'vis3/', title: 'Vis3'},
+  { url: 'vis4/', title: 'Vis4'}
 ];
 
 // Add nav to beginning of html
@@ -21,7 +21,7 @@ for (let p of pages) {
 
   // Checks if we are on home page
   if (!ARE_WE_HOME && !url.startsWith('http')) {
-    url = '/portfolio/' + url;
+    url = '/dsc106-project3/' + url;
   }
   let title = p.title;
   let a = document.createElement('a');
