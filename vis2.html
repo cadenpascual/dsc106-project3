@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dexcom Glucose Heatmap</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .heatmap-cell { stroke: #fff; }
+        .axis-label { font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h2>Dexcom Glucose Heatmap (Daily Rows, 15-Min Intervals)</h2>
+    <svg width="900" height="600"></svg>
+    <script>
+        d3.csv("dexcom_processed.csv").then(function(data) {
+            data.forEach(d => {
+                d.Timestamp = new Date(d.Timestamp);
+                d.Date = d.Timestamp.toISOString().split('T')[0];
+                d.Time = d.Timestamp.toTimeString().split(' ')[0].slice(0, 5);
+                d["Glucose Value (mg/dL)"] = +d["Glucose Value (mg/dL)"];
+            });
+
+            const margin = { top: 40, right: 30, bottom: 50, left: 100 },
+                  width = 900 - margin.left - margin.right,
+                  height = 600 - margin.top - margin.bottom;
+
+            const svg = d3.select("svg").attr("width", width + margin.left + margin.right)
+                          .attr("height", height + margin.top + margin.bottom)
+                          .append("g")
+                          .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const dates = [...new Set(data.map(d => d.Date))].sort();
+            const times = [...new Set(data.map(d => d.Time))].sort();
+
+            const x = d3.scaleBand().domain(times).range([0, width]).padding(0.05);
+            const y = d3.scaleBand().domain(dates).range([0, height]).padding(0.05);
+            
+            const colorScale = d3.scaleSequential(d3.interpolateCool)
+                                 .domain([d3.min(data, d => d["Glucose Value (mg/dL)"]),
+                                          d3.max(data, d => d["Glucose Value (mg/dL)"])]);
+
+            svg.append("g")
+               .attr("transform", `translate(0,${height})`)
+               .call(d3.axisBottom(x).tickValues(times.filter((_, i) => i % 4 === 0)))
+               .selectAll("text")
+               .style("text-anchor", "end")
+               .attr("dx", "-0.5em")
+               .attr("dy", "0.5em")
+               .attr("transform", "rotate(-45)");
+
+            svg.append("g").call(d3.axisLeft(y));
+
+            svg.selectAll(".heatmap-cell")
+               .data(data)
+               .enter()
+               .append("rect")
+               .attr("x", d => x(d.Time))
+               .attr("y", d => y(d.Date))
+               .attr("width", x.bandwidth())
+               .attr("height", y.bandwidth())
+               .style("fill", d => colorScale(d["Glucose Value (mg/dL)"]))
+               .attr("class", "heatmap-cell");
+        });
+    </script>
+</body>
+</html>
