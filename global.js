@@ -1,10 +1,3 @@
-// Select Function
-function $$(selector, context = document) {
-  return Array.from(context.querySelectorAll(selector));
-}
-
-// Step 2
-const navLinks = $$("nav a")
 let currentLink = navLinks.find(
   (a) => a.host === location.host && a.pathname === location.pathname
 );
@@ -18,11 +11,10 @@ if (currentLink) {
 // Create Page Links
 let pages = [
   { url: '', title: 'Home' },
-  { url: 'vis1/', title: 'Vis1'},
-  { url: 'vis2/', title: 'Vis2'},
-  { url: 'vis3/', title: 'Vis3'},
-  { url: 'vis4/', title: 'Vis4'}
-  { url: 'vis5/', title: 'Vis5'}
+  { url: 'projects/', title: 'Projects' },
+  { url: 'contact/', title: 'Contact'},
+  { url: 'resume/', title: 'Resume'},
+  { url: 'highlight/', title: 'Highlight'}
 ];
 
 // Add nav to beginning of html
@@ -38,7 +30,7 @@ for (let p of pages) {
 
   // Checks if we are on home page
   if (!ARE_WE_HOME && !url.startsWith('http')) {
-    url = '/dsc106-project3'/ + url;
+    url = '/portfolio/' + url;
   }
   let title = p.title;
   let a = document.createElement('a');
