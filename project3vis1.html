@@ -40,19 +40,22 @@
                 .call(xAxis)
                 .append("text")
                 .attr("x", width / 2)
-                .attr("y", 35)
+                .attr("y", 40)
                 .attr("fill", "black")
                 .attr("class", "axis-label")
+                .style("text-anchor", "middle")
                 .text("Time");
 
             svg.append("g")
                 .attr("transform", `translate(${margin.left},0)`)
                 .call(yAxis)
                 .append("text")
-                .attr("x", -margin.left)
-                .attr("y", 10)
+                .attr("transform", "rotate(-90)")
+                .attr("x", -height / 2)
+                .attr("y", -40)
                 .attr("fill", "black")
                 .attr("class", "axis-label")
+                .style("text-anchor", "middle")
                 .text("Glucose Level (mg/dL)");
 
             const line = d3.line()
