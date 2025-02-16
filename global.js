@@ -4,6 +4,7 @@ let pages = [
   { url: '', title: 'Home' },
   { url: 'vis1/', title: 'Vis1'},
   { url: 'vis2/', title: 'Vis2'},
+  { url: 'vis3/', title: 'Vis3'}
 ];
 
 // Add nav to beginning of html
@@ -19,7 +20,7 @@ for (let p of pages) {
 
   // Checks if we are on home page
   if (!ARE_WE_HOME && !url.startsWith('http')) {
-    url = '/dsc106-project3/' + url;
+    url = '../' + url;
   }
   let title = p.title;
   let a = document.createElement('a');
