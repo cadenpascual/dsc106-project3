@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 2rem;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: row;  
+    flex-direction: column;
+    justify-content: left; 
+    align-items: flex-start;
+    gap: 1rem; 
+    margin: 2rem auto;
+    max-width: 1200px; 
+  }
+  
+  svg#chart {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 1050px; 
+    height: 400px; 
+  }
+
+  svg#food-data {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 1050px; 
+    height: 80px;
+  }
+  
+  .gridlines line {
+    stroke: #ccc;
+    stroke-dasharray: 3,3;
+  }
+  
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+  
+  circle {
+    transition: 200ms;
+    transform-origin: center;
+    transform-box: fill-box;
+  }

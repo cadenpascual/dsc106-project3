@@ -1,15 +1,4 @@
-Index,Timestamp (YYYY-MM-DDThh:mm:ss),Event Type,Event Subtype,Patient Info,Device Info,Source Device ID,Glucose Value (mg/dL),Insulin Value (u),Carb Value (grams),Duration (hh:mm:ss),Glucose Rate of Change (mg/dL/min),Transmitter Time (Long Integer)
-1,,FirstName,,2019,,,,,,,,
-2,,LastName,,009,,,,,,,,
-3,,DateOfBirth,,1970-01-01,,,,,,,,
-4,,Device,,,Dexcom G6 Mobile App,iPhone G6,,,,,,
-5,,Alert,Fall,,,iPhone G6,,,,,3.0,
-6,,Alert,High,,,iPhone G6,200.0,,,,,
-7,,Alert,Low,,,iPhone G6,80.0,,,,,
-8,,Alert,Signal Loss,,,iPhone G6,,,,00:20:00,,
-9,,Alert,Rise,,,iPhone G6,,,,,3.0,
-10,,Alert,Urgent Low,,,iPhone G6,55.0,,,,,
-11,,Alert,Urgent Low Soon,,,iPhone G6,55.0,,,,,
+index,timestamp,event_type,event_subtype,patient_info,device_info,source_device_ID,glucose,insulin_value,carb_value,duration,glucose_rate_of_change,transmitter_time
 12,2020-03-21 10:51:51,EGV,,,,iPhone G6,169.0,,,,,8101.0
 13,2020-03-21 10:56:51,EGV,,,,iPhone G6,165.0,,,,,8401.0
 14,2020-03-21 11:01:51,EGV,,,,iPhone G6,161.0,,,,,8701.0
