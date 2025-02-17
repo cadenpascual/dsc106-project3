@@ -1,6 +1,6 @@
-# dsc106-project3
+# DSC 106 - Project 3
 
-Team Name: Glucose Gremlins
+Team Name: The Glucose Gremlins
 
 Team Members: 
 - Caden Pascual
