@@ -172,15 +172,15 @@ function createFoodPlot(glucoseData, foodData){
     .style('fill-opacity', 0.7)
 }
 
-async function main(){
+async function main(dataset = "009"){
   
   // Caden sets up the dropdown
   // Dropdown selects the food/glucose data for the person
 
   // Load that
   // Sage parses the code
-  let glucoseData = await loadData('./data/Dexcom_009.csv');
-  let foodData = await loadData("./data/Food_Log_009.csv");
+  let glucoseData = await loadData(`./data/Dexcom_${dataset}.csv`);
+  let foodData = await loadData(`./data/Food_Log_${dataset}.csv`);
 
   // Andy sets the slider filter here
   // We filter the data here
@@ -189,5 +189,15 @@ async function main(){
   createFoodPlot(glucoseData,foodData);
 
 }
+
+
+d3.select("#select-dataset").on("change", function() {
+  // Remove old data
+  d3.select("#chart").selectAll("*").remove();
+
+  // Import New Data
+  const selectedDataset = this.value;
+  main(selectedDataset);
+});
 
 main();
