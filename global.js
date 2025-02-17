@@ -19,6 +19,15 @@ function parseGlucoseData(glucoseData){
 }
 
 function parseFoodData(foodData){
+  // TODO: Make groups based on food times
+  // [TIME: {FOODGROUP}, TIME: {}, TIME: {}... ]
+  // FOODGROUP: {aggstats: {calories, sugar, ...}, foods: [FOOD,FOOD, FOOD,...]}
+  // FOOD: {calories, sugar, ...}
+
+  const groupedFoods = d3.group(foodData, d => d.time_begin);
+
+  console.log(groupedFoods);
+  
   return foodData.map(d => ({
     "start": new Date(d.time_begin),
     "food": d.searched_food,
@@ -165,9 +174,17 @@ function createFoodPlot(glucoseData, foodData){
 
 async function main(){
   
+  // Caden sets up the dropdown
+  // Dropdown selects the food/glucose data for the person
+
+  // Load that
+  // Sage parses the code
   let glucoseData = await loadData('./data/Dexcom_009.csv');
   let foodData = await loadData("./data/Food_Log_009.csv");
-  console.log(glucoseData);
+
+  // Andy sets the slider filter here
+  // We filter the data here
+
   createGlucoseScatterplot(glucoseData);
   createFoodPlot(glucoseData,foodData);
 
