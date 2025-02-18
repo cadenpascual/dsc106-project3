@@ -179,7 +179,7 @@ function updateSliderLabel() {
   const slider = d3.select("#filter-slider");
 
   // Compute min and max based on data
-  const minValue = d3.min(globalFoodData, d => +d.combined_stats[selectedFilter]);
+  const minValue = 0;
   const maxValue = d3.max(globalFoodData, d => +d.combined_stats[selectedFilter]);
 
   const stepSize = 1;
