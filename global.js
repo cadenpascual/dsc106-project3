@@ -18,30 +18,34 @@ function parseGlucoseData(glucoseData){
   })); 
 }
 
-function parseFoodData(foodData){
-
+function parseFoodData(foodData) {
   const groupedFoods = d3.group(foodData, d => d.time_begin);
 
   const data = Array.from(groupedFoods, ([timestamp, values]) => ({
-    "start": new Date(timestamp),
-    "combined_stats": {
-      "calories": d3.sum(values, (val) => val.calorie),
-      "sugar": d3.sum(values, (val) => val.sugar)
-    },
-    "foods": values.map(d => ({
-      "start": new Date(d.time_begin),
-      // TODO: Parse this to a date!
-      "end": d.time_end,
-      "food": d.searched_food,
-      "calories": d.calorie,
-      "sugar": d.sugar,
-      "amount": d.amount,
-      "unit": d.unit
-    }))
+      "start": new Date(timestamp),
+      "combined_stats": {
+          "calories": d3.sum(values, val => +val.calorie),
+          "sugar": d3.sum(values, val => +val.sugar),
+          "dietary_fiber": d3.sum(values, val => +val.dietary_fiber),
+          "total_fat": d3.sum(values, val => +val.total_fat),
+          "protein": d3.sum(values, val => +val.protein),
+          "total_carb": d3.sum(values, val => +val.total_carb),
+      },
+      "foods": values.map(d => ({
+          "start": new Date(d.time_begin),
+          "end": d.time_end,
+          "food": d.searched_food,
+          "calories": d.calorie,
+          "sugar": d.sugar,
+          "dietary_fiber": d.dietary_fiber,
+          "total_fat": d.total_fat,
+          "protein": d.protein,
+          "total_carb": d.total_carb,
+          "amount": d.amount,
+          "unit": d.unit
+      }))
   }));
 
-  console.log(data);
-  
   return data;
 }
 
@@ -184,7 +188,7 @@ function updateSliderLabel() {
       .attr("min", minValue)
       .attr("max", maxValue)
       .attr("step", stepSize)
-      .property("value", maxValue);
+      .property("value", minValue);
 
   // Update displayed slider value
   d3.select("#filter-value").text(slider.property("value"));
@@ -215,7 +219,7 @@ function updatePlots() {
 
   // Filter food data based on the threshold
   const filteredFoodData = globalFoodData.filter(d =>
-    +d.combined_stats[selectedFilter] <= threshold
+    +d.combined_stats[selectedFilter] >= threshold
   );
 
   const validTimestamps = new Set(filteredFoodData.map(d => d.start.getTime()));
