@@ -1,40 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="./style.css">
-        <script type="module" src="global.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DSC 106 - Project 3</title>
-    </head>
-    <body>
-        <label id="select-dropdown">
-            Select Person:
-            <select id ="select-dataset">
-                <option value="007">Participant 7</option>
-                <option value="008">Participant 8</option>
-                <option value="009">Participant 9</option>
-                <option value="012">Participant 12</option>
-                <option value="013">Participant 13</option>
-            </select>
-        </label>
-        <h1>Watching Glucose Variables with Wearables</h1>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script type="module" src="global.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSC 106 - Project 3</title>
+</head>
+<body>
+
+    <h1>Watching Glucose Variables with Wearables</h1>
+
+    <div id="main-container">
+    
         <div class="container">
-            <svg id="chart"> 
-
-            </svg>
-            <svg id="food-data"> 
-
-            </svg>
+            <svg id="chart"></svg>
+            <svg id="food-data"></svg>
         </div>
-        <div>
-            <dl>
-                <dd></dd>
-            </dl>
+    
+        <div id="sidebar">
+            <label id="select-dropdown">
+                Select Person:
+                <select id="select-dataset">
+                    <option value="007">Participant 7</option>
+                    <option value="008">Participant 8</option>
+                    <option value="009">Participant 9</option>
+                    <option value="012">Participant 12</option>
+                    <option value="013">Participant 13</option>
+                </select>
+            </label>
+    
+            <div id="filter-container">
+                <label for="filter-type">Filter by:</label>
+                <select id="filter-type">
+                    <option value="calories">Calories</option>
+                    <option value="sugar">Sugar</option>
+                </select>
+    
+                <label for="filter-slider">Threshold:</label>
+                <input type="range" id="filter-slider" min="0" max="1000" step="1" value="500">
+                <span id="filter-value">500</span>
+                <label for="filter-toggle">Enable Filtering:</label>
+                <input type="checkbox" id="filter-toggle" checked>
+            </div>
         </div>
+    
+    </div>    
 
-        <div class="writeup">
-
-        </div>
-    </body>
+</body>
 </html>
