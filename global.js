@@ -237,7 +237,7 @@ function updatePlots() {
 let globalGlucoseData;
 let globalFoodData;
 
-async function main(dataset = "009"){
+async function main(dataset = "001"){
   
   // Caden sets up the dropdown
   // Dropdown selects the food/glucose data for the person
