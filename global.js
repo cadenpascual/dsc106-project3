@@ -268,7 +268,9 @@ d3.select("#select-dataset").on("change", function() {
   main(selectedDataset);
 });
 
-main();
+main().then(() => {
+  updatePlots(); // Ensure the graph starts with filtering off
+});
 
 // Listen for checkbox toggle event
 d3.select("#filter-toggle").on("change", updatePlots);
