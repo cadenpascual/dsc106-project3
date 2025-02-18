@@ -19,23 +19,30 @@ function parseGlucoseData(glucoseData){
 }
 
 function parseFoodData(foodData){
-  // TODO: Make groups based on food times
-  // [TIME: {FOODGROUP}, TIME: {}, TIME: {}... ]
-  // FOODGROUP: {aggstats: {calories, sugar, ...}, foods: [FOOD,FOOD, FOOD,...]}
-  // FOOD: {calories, sugar, ...}
 
   const groupedFoods = d3.group(foodData, d => d.time_begin);
 
-  console.log(groupedFoods);
-  
-  return foodData.map(d => ({
-    "start": new Date(d.time_begin),
-    "food": d.searched_food,
-    "calories": d.calorie,
-    "sugar": d.sugar,
-    "amount": d.amount,
-    "unit": d.unit
+  const data = Array.from(groupedFoods, ([timestamp, values]) => ({
+    "start": new Date(timestamp),
+    "combined_stats": {
+      "calories": d3.sum(values, (val) => val.calorie),
+      "sugar": d3.sum(values, (val) => val.sugar)
+    },
+    "foods": values.map(d => ({
+      "start": new Date(d.time_begin),
+      // TODO: Parse this to a date!
+      "end": d.time_end,
+      "food": d.searched_food,
+      "calories": d.calorie,
+      "sugar": d.sugar,
+      "amount": d.amount,
+      "unit": d.unit
+    }))
   }));
+
+  console.log(data);
+  
+  return data;
 }
 
 const width = 1000;
