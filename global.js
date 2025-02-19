@@ -34,13 +34,13 @@ function parseFoodData(foodData) {
       "foods": values.map(d => ({
           "start": new Date(d.time_begin),
           "end": d.time_end,
-          "food": d.searched_food,
-          "calories": d.calorie,
-          "sugar": d.sugar,
-          "dietary_fiber": d.dietary_fiber,
-          "total_fat": d.total_fat,
-          "protein": d.protein,
-          "total_carb": d.total_carb,
+          "food": d.searched_food != "" ? d.searched_food :  d.logged_food,
+          "calories": d.calorie != "" ? d.calorie : "0.0",
+          "sugar": d.sugar != "" ? d.sugar : "0.0",
+          "dietary_fiber": d.dietary_fiber != "" ? d.dietary_fiber : "0.0",
+          "total_fat": d.total_fat != "" ? d.total_fat : "0.0",
+          "protein": d.protein != "" ? d.protein : "0.0",
+          "total_carb": d.total_carb != "" ? d.total_carb : "0.0",
           "amount": d.amount,
           "unit": d.unit
       }))
@@ -100,7 +100,6 @@ function createGlucoseScatterplot(glucoseData) {
 }
 
 
-
 function createFoodPlot(glucoseData, foodData){
   const svg = d3
       .select('#chart')
@@ -156,7 +155,8 @@ function createFoodPlot(glucoseData, foodData){
     .style('fill-opacity', 0.7)
     .on('mouseenter', (event, group) => {
       d3.select(event.currentTarget).style('fill-opacity', 1); // Full opacity on hover 
-      updateContent(group)
+      
+      updateContent(group);
     })
     .on('mouseleave', (event) => {
       d3.select(event.currentTarget).style('fill-opacity', 0.7);
@@ -173,33 +173,40 @@ function prettySummary(foodStats){
 
 function updateContent(foodGroup) {
   let tableData = d3.select("tbody");
+  let tableTime = document.getElementById("food-time");
+  // Clear Text Content
   tableData.html("");
-  
-  let stats = foodGroup.combined_stats;
 
-  // Add Summary Data
-  tableBody.append("tr").html(`
-    <td>All Foods</td>
-    <td>${stats.calories}</td>
-    <td>${stats.sugar}</td>
-    <td>${stats.dietary_fiber}</td>
-    <td>${stats.total_fat}</td>
-    <td>${stats.protien}</td>
-    <td>${stats.total_carb}</td>
-  `);
-  
+  tableTime.innerHTML = `<th colspan="6">Time: ${foodGroup.start.toLocaleString()}<th>`;
+
+
   // Add Individual Food Data
   foodGroup.foods.forEach((food) => {
-    tableBody.append("tr").html(`
-      <td>All Foods</td>
+    tableData.append("tr").html(`
+      <td>${food.food}</td>
       <td>${food.calories}</td>
       <td>${food.sugar}</td>
       <td>${food.dietary_fiber}</td>
       <td>${food.total_fat}</td>
-      <td>${food.protien}</td>
+      <td>${food.protein}</td>
       <td>${food.total_carb}</td>
     `);
   });
+  
+  let stats = foodGroup.combined_stats;
+  // Add Summary Data if more than 1 food
+  if (foodGroup.foods.length > 1) {
+    tableData.append("tr").html(`
+      <td><strong>Summary</strong></td>
+      <td>${stats.calories.toFixed(2)}</td>
+      <td>${stats.sugar.toFixed(2)}</td>
+      <td>${stats.dietary_fiber.toFixed(2)}</td>
+      <td>${stats.total_fat.toFixed(2)}</td>
+      <td>${stats.protein.toFixed(2)}</td>
+      <td>${stats.total_carb.toFixed(2)}</td>
+    `)};
+  
+  
 }
 
 
