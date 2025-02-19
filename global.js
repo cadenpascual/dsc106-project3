@@ -197,7 +197,7 @@ function updateContent(foodGroup) {
   // Add Summary Data if more than 1 food
   if (foodGroup.foods.length > 1) {
     tableData.append("tr").html(`
-      <td><strong>Summary</strong></td>
+      <td><strong>Total</strong></td>
       <td>${stats.calories.toFixed(2)}</td>
       <td>${stats.sugar.toFixed(2)}</td>
       <td>${stats.dietary_fiber.toFixed(2)}</td>
