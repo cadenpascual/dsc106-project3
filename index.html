@@ -15,7 +15,7 @@
     
         <div class="container">
             <svg id="chart"></svg>
-            <svg id="food-data"></svg>
+            
         </div>
     
         <div id="sidebar">
@@ -46,17 +46,68 @@
                     <option value="protein">Protein</option>
                     <option value="total_carb">Total Carbs</option>
                 </select>
-
-    
                 <label for="filter-slider">Threshold:</label>
                 <input type="range" id="filter-slider" min="0" max="1000" step="1" value="500">
                 <span id="filter-value">500</span>
                 <label for="filter-toggle">Enable Filtering:</label>
                 <input type="checkbox" id="filter-toggle">
             </div>
+    </div>
+        <div id="tooltip">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food</th>
+                        <th>Calories</th>
+                        <th>Sugar (g)</th>
+                        <th>Fiber (g)</th>
+                        <th>Fat (g)</th>
+                        <th>Protein (g)</th>
+                        <th>Carbs (g)</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            
+            <dt>Summary Data</dt>
+            <dd id="food-summary"></dd>
+              
+            <dt>Individual Data</dt>
+            <dd id="food-data"></dd>
         </div>
     
-    </div>    
+    </div>
 
+    
+    <div class="writeup">
+        <h2>Team GG</h2>
+        <ul>
+            <li>Andy Huang</li>
+            <li>Caden Pascual</li>
+            <li>Sage Yang</li>
+            <li>Isaiah Ton</li>
+        <ul>
+        <h3>Decision Rationale</h3>
+        <p>Our project mainly focused on visualizing glucose level over time using data 
+            collected from patients from wearable devices. By using D3.js we created an 
+            interactive scatter plot to help explore the glucose levels and its relationship 
+            with the dietary intake of certain macronutrients. The main goal is to provide insights into daily glucose 
+            fluctuations and how they respond to meals. In terms of filtering we decided to
+            filter the glucose data by the corresponding macronutrient given their logged time
+            and amount. In terms of data filtering the glucose measurement data was taken in consistent 
+            15 minute intervals giving us structured and clean data to work with. The logged food
+            data points on the other hand was not nearly as uniform or structured, having seemingly
+            arbitrary time inputs that would jump around. This led to an issue of the filter filtering 
+            out large chunks of data since there was simply no logged food at that point in time. To 
+            bypass this issue we decided to filte
+            
+        </p>
+    <h3>Development Process</h3>
+    <p>
+        
+    </p>
+    </div>
 </body>
 </html>

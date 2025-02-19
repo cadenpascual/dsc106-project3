@@ -154,6 +154,52 @@ function createFoodPlot(glucoseData, foodData){
     .attr('r', 3)
     .attr('fill', 'green')
     .style('fill-opacity', 0.7)
+    .on('mouseenter', (event, group) => {
+      d3.select(event.currentTarget).style('fill-opacity', 1); // Full opacity on hover 
+      updateContent(group)
+    })
+    .on('mouseleave', (event) => {
+      d3.select(event.currentTarget).style('fill-opacity', 0.7);
+    });
+}
+
+function prettySummary(foodStats){
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+  return Object.entries(foodStats).map(val => {
+    return `${val[0].replace("_", " ")}: ${val[1]}`
+  }).join("\n")
+}
+
+
+function updateContent(foodGroup) {
+  let tableData = d3.select("tbody");
+  tableData.html("");
+  
+  let stats = foodGroup.combined_stats;
+
+  // Add Summary Data
+  tableBody.append("tr").html(`
+    <td>All Foods</td>
+    <td>${stats.calories}</td>
+    <td>${stats.sugar}</td>
+    <td>${stats.dietary_fiber}</td>
+    <td>${stats.total_fat}</td>
+    <td>${stats.protien}</td>
+    <td>${stats.total_carb}</td>
+  `);
+  
+  // Add Individual Food Data
+  foodGroup.foods.forEach((food) => {
+    tableBody.append("tr").html(`
+      <td>All Foods</td>
+      <td>${food.calories}</td>
+      <td>${food.sugar}</td>
+      <td>${food.dietary_fiber}</td>
+      <td>${food.total_fat}</td>
+      <td>${food.protien}</td>
+      <td>${food.total_carb}</td>
+    `);
+  });
 }
 
 
@@ -281,3 +327,5 @@ d3.select("#filter-toggle").on("change", updatePlots);
 
 // Ensure slider movement also updates the plot
 d3.select("#filter-slider").on("input", updatePlots);
+
+
